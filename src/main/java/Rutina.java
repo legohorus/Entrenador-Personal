@@ -32,10 +32,11 @@ public class Rutina {
         boolean anadido = false;
         if (numEjercicios < ejercicios.length){
             ejercicios[numEjercicios] = ejercicio;
+            numEjercicios++;
             anadido = true;
         }
         else {
-            System.out.println("La lista de ejercicios ya está completa");
+            System.out.print("No se pueden añadir más ejercicios.\n");
         }
         // Añade un ejercicio a la rutina (si está completa, muestra un mensaje de error)
         return anadido; // @todo MODIFICAR PARA DEVOLVER SI SE HA AÑADIDO EL EJERCICIO
@@ -45,10 +46,11 @@ public class Rutina {
         boolean anadido = false;
         if (numEstiramientos < estiramientos.length){
             estiramientos[numEstiramientos] = estiramiento;
+            numEstiramientos++;
             anadido = true;
         }
         else {
-            System.out.println("La lista de estiramientos ya está completa");
+            System.out.print("No se pueden añadir más estiramientos.\n");
         }
         // Añade un estiramiento a la rutina (si está completa, muestra un mensaje de error)
         return anadido; // @todo MODIFICAR PARA DEVOLVER SI SE HA AÑADIDO EL ESTIRAMIENTO
@@ -56,12 +58,12 @@ public class Rutina {
 
     public boolean ejerciciosCompletos() {
         // Comprueba si la rutina tiene el máximo de ejercicios
-        return numEjercicios == (ejercicios.length -1); // @todo MODIFICAR PARA DEVOLVER SI ESTÁN COMPLETOS LOS EJERCICIOS
+        return numEjercicios == ejercicios.length; // @todo MODIFICAR PARA DEVOLVER SI ESTÁN COMPLETOS LOS EJERCICIOS
     }
 
     public boolean estiramientosCompletos() {
         // Comprueba si la rutina tiene el máximo de estiramientos
-        return numEstiramientos == (estiramientos.length -1); // @todo MODIFICAR PARA DEVOLVER SI ESTÁN COMPLETOS LOS ESTIRAMIENTOS
+        return numEstiramientos == estiramientos.length; // @todo MODIFICAR PARA DEVOLVER SI ESTÁN COMPLETOS LOS ESTIRAMIENTOS
     }
 
     public int numEjercicios() {
@@ -76,22 +78,42 @@ public class Rutina {
 
     @Override
     public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Rutina: ").append(nombre).append("\n");
+        stringBuilder.append("Ejercicios:").append("\n");
+        for (int i = 0; i < numEjercicios; i++){
+            stringBuilder.append("- ").append(ejercicios[i]).append("\n");
+        }
+        stringBuilder.append("Estiramientos:").append("\n");
+        for (int i = 0; i < numEstiramientos; i++){
+            stringBuilder.append(i + 1).append(". ").append(estiramientos[i]).append("\n");
+        }
         // Devuelve una representación en forma de cadena de la rutina, para mostrar por pantalla
-        return null; // @todo MODIFICAR PARA DEVOLVER LA CADENA CORRECTA
+        return stringBuilder.toString(); // @todo MODIFICAR PARA DEVOLVER LA CADENA CORRECTA
     }
 
     public String toRawString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(nombre).append("\n");
+        for (int i = 0; i < numEjercicios; i++){
+            stringBuilder.append(ejercicios[i]).append("\n");
+        }
+        stringBuilder.append("ESTIRAMIENTOS").append("\n");
+        for (int i = 0; i < numEstiramientos; i++){
+            stringBuilder.append(estiramientos[i]).append("\n");
+        }
+        stringBuilder.append("=====").append("\n");
         // Devuelve una representación en forma de cadena de la rutina sin formato, para guardar en archivo
-        return null; // @todo MODIFICAR PARA DEVOLVER LA CADENA CORRECTA
+        return stringBuilder.toString(); // @todo MODIFICAR PARA DEVOLVER LA CADENA CORRECTA
     }
 
     public int getMaxEjercicios() {
         // Devuelve el máximo de ejercicios permitidos en la rutina
-        return 0; // @todo MODIFICAR PARA DEVOLVER EL MÁXIMO DE EJERCICIOS
+        return ejercicios.length; // @todo MODIFICAR PARA DEVOLVER EL MÁXIMO DE EJERCICIOS
     }
 
     public int getMaxEstiramientos() {
         // Devuelve el máximo de estiramientos permitidos en la rutina
-        return 0; // @todo MODIFICAR PARA DEVOLVER EL MÁXIMO DE ESTIRAMIENTOS
+        return estiramientos.length; // @todo MODIFICAR PARA DEVOLVER EL MÁXIMO DE ESTIRAMIENTOS
     }
 }
