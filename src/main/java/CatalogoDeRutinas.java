@@ -79,7 +79,7 @@ public class CatalogoDeRutinas {
     }
 
     public void cargarRutinasDeArchivo(String nombreArchivo, int maxEjercicios, int maxEstiramientos) throws IOException {
-        // Carga las rutinas desde un archivo de texto y las añade al catálogo a
+        // Carga las rutinas desde un archivo de texto y las añade al catálogo
         try(FileWriter fw = new FileWriter(nombreArchivo, StandardCharsets.UTF_8)) {
             for(int i = 0; i < numRutinas; i++) {
                 fw.write(rutinas[i].toRawString());
