@@ -37,9 +37,11 @@ public class CatalogoDeRutinas {
             }
         }
         Rutina[] resultado = new Rutina[cuenta];
+        int pos = 0;
         for (int i = 0; i < numRutinas; i++) {
             if (rutinas[i].getNombre().toLowerCase().contains(texto.toLowerCase())) {
-                resultado[i] = rutinas[i];
+                resultado[pos] = rutinas[i];
+                pos++;
             }
         }
         return resultado;
