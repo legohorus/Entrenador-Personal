@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
@@ -18,7 +17,7 @@ public class CatalogoDeRutinas {
         // Añade una rutina al catálogo (si está completo, muestra un mensaje de error)
         boolean agregado = false;
         if (catalogoCompleto()) {
-            System.out.print("No se pueden añadir más rutinas.");
+            System.out.println("No se pueden añadir más rutinas.");
         }
         else if (rutina != null){
             rutinas [numRutinas] = rutina;
@@ -60,11 +59,26 @@ public class CatalogoDeRutinas {
 
     public void cargarRutinasDeArchivo(String nombreArchivo, int maxEjercicios, int maxEstiramientos) throws IOException {
         // Carga las rutinas desde un archivo de texto y las añade al catálogo
-        try(FileWriter fw = new FileWriter(nombreArchivo, StandardCharsets.UTF_8)) {
-            for(int i = 0; i < numRutinas; i++) {
-                fw.write(rutinas[i].toRawString());
-            }
-        }
+       try (BufferedReader bw = new BufferedReader(new InputStreamReader(new FileInputStream(nombreArchivo), StandardCharsets.UTF_8))) {
+           String linea = bw.readLine();
+           while (linea != null && !catalogoCompleto()) {
+               if(!linea.isEmpty()){
+                   Rutina nueva = new Rutina(linea, maxEjercicios, maxEstiramientos);
+                   linea = bw.readLine();
+                   while(linea != null && !linea.equals("ESTIRAMIENTOS")){
+                       nueva.agregarEjercicio(linea);
+                       linea = bw.readLine();
+                   }
+                   linea = bw.readLine();
+                   while(linea != null && !linea.equals("=====")){
+                       nueva.agregarEstiramiento(linea);
+                       linea = bw.readLine();
+                   }
+                   agregarRutina(nueva);
+               }
+               linea = bw.readLine();
+           }
+       }
     }
 
     public boolean catalogoCompleto() {
