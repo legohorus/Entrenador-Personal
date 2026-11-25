@@ -36,15 +36,13 @@ public class CatalogoDeRutinas {
                 cuenta++;
             }
         }
-                Rutina[] resultado = new Rutina[cuenta];
-                int pos = 0;
-                for (int i = 0; i < numRutinas; i++) {
-                    if (rutinas[i].getNombre().toLowerCase().contains(texto.toLowerCase())) {
-                        resultado[pos] = rutinas[i];
-                        pos++;
-                    }
-                }
-             return resultado;
+        Rutina[] resultado = new Rutina[cuenta];
+        for (int i = 0; i < numRutinas; i++) {
+            if (rutinas[i].getNombre().toLowerCase().contains(texto.toLowerCase())) {
+                resultado[i] = rutinas[i];
+            }
+        }
+        return resultado;
     }
 
     public void guardarRutinasEnArchivo(String nombreArchivo) throws IOException {
@@ -62,12 +60,7 @@ public class CatalogoDeRutinas {
 
     public boolean catalogoCompleto() {
         // Comprueba si el catálogo de rutinas está completo
-        if(numRutinas==rutinas.length){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return numRutinas == rutinas.length;
         // @todo MODIFICAR PARA DEVOLVER SI ESTÁ COMPLETO
     }
 
@@ -84,11 +77,11 @@ public class CatalogoDeRutinas {
                 pos = i;
             }
         }
-            if (pos != -1) {
-                for (int i = pos; i < numRutinas - 1; i++) {
-                    rutinas[i] = rutinas[i + 1];
-                }
-                numRutinas--;
+        if (pos != -1) {
+            for (int i = pos; i < numRutinas - 1; i++) {
+                rutinas[i] = rutinas[i + 1];
+            }
+            numRutinas--;
             }
         }
     }
