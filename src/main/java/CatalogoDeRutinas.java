@@ -1,5 +1,7 @@
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 public class CatalogoDeRutinas {
@@ -48,6 +50,11 @@ public class CatalogoDeRutinas {
     }
 
     public void guardarRutinasEnArchivo(String nombreArchivo) throws IOException {
+        try (FileWriter fileWriter = new FileWriter(nombreArchivo, StandardCharsets.UTF_8)) {
+            for (int i = 0; i < numRutinas; i++) {
+                fileWriter.write(rutinas[i].toRawString());
+            }
+        }
         // Guarda las rutinas en un archivo de texto
     }
 
