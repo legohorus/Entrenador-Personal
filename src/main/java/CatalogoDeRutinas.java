@@ -14,19 +14,16 @@ public class CatalogoDeRutinas {
 
     public boolean agregarRutina(Rutina rutina) {
         // Añade una rutina al catálogo (si está completo, muestra un mensaje de error)
-        if (rutina == null) {
-            return true;
-        }
-        else if (catalogoCompleto()) {
+        boolean agregado = false;
+        if (catalogoCompleto()) {
             System.out.print("No se pueden añadir más rutinas.");
-            return false;
         }
-        else {
+        else if (rutina != null){
             rutinas [numRutinas] = rutina;
             numRutinas++;
-            return true;
+            agregado = true;
         }
-
+        return agregado;
         // @todo MODIFICAR PARA DEVOLVER SI SE HA AÑADIDO LA RUTINA
     }
 
