@@ -1,5 +1,8 @@
 import java.util.Arrays;
 
+/**
+ * objeto rutina
+ */
 public class Rutina {
     /**
      * lista de los ejercicios de la rutina
@@ -16,11 +19,11 @@ public class Rutina {
     /**
      * numero de ejercicios que hay actualmente en la rutina
      */
-    int numEjercicios = 0;
+    int numEjercicios;
     /**
      * numero de estiramientos que hay actualmente en la rutina
      */
-    int numEstiramientos = 0;
+    int numEstiramientos;
 
     /**
      * Inicialización de la rutina
@@ -32,6 +35,8 @@ public class Rutina {
         this.nombre = nombre;
         ejercicios = new String[maxEjercicios];
         estiramientos = new String[maxEstiramientos];
+        numEjercicios = 0;
+        numEstiramientos = 0;
     }
 
     /**

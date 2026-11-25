@@ -1,21 +1,35 @@
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * objeto catatogo de rutinas
+ */
 public class CatalogoDeRutinas {
+    /**
+     * numero de rutinas
+     */
     private int numRutinas;
+    /**
+     * lista de las rutinas del catalogo
+     */
     private Rutina[] rutinas;
 
+    /**
+     * Inicialización del catálogo de rutinas
+     * @param maxRutinasEnCatalogo capacidad maxima del catalogo
+     */
     public CatalogoDeRutinas(int maxRutinasEnCatalogo) {
-        // Inicialización del catálogo de rutinas
         rutinas = new Rutina[maxRutinasEnCatalogo];
         numRutinas = 0;
     }
 
+    /**
+     * Añade una rutina al catálogo (si está completo, muestra un mensaje de error)
+     * @param rutina rutina a añadir
+     * @return true si se ha añadido la rutina, false si el catalogo esta lleno o la rutina era null
+     */
     public boolean agregarRutina(Rutina rutina) {
-        // Añade una rutina al catálogo (si está completo, muestra un mensaje de error)
         boolean agregado = false;
         if (catalogoCompleto()) {
             System.out.print("No se pueden añadir más rutinas.");
@@ -26,12 +40,14 @@ public class CatalogoDeRutinas {
             agregado = true;
         }
         return agregado;
-        // @todo MODIFICAR PARA DEVOLVER SI SE HA AÑADIDO LA RUTINA
     }
 
+    /**
+     * Busca rutinas cuyo nombre contenga el texto (sin distinguir mayúsculas) y devuelve todas las encontradas
+     * @param texto texto a buscar en las rutinas
+     * @return un array de rutinas que contienen en el nombre el texto buscado
+     */
     public Rutina[] buscarRutinaPorNombre(String texto) {
-        // Busca rutinas cuyo nombre contenga el texto (sin distinguir mayúsculas) y devuelve todas las encontradas
-        // @todo MODIFICAR PARA DEVOLVER LAS RUTINAS ENCONTRADAS
         int cuenta = 0;
         for (int i = 0; i < numRutinas; i++) {
             if (rutinas[i].getNombre().toLowerCase().contains(texto.toLowerCase())) {
@@ -49,13 +65,17 @@ public class CatalogoDeRutinas {
         return resultado;
     }
 
+    /**
+     * Guarda las rutinas en un archivo de texto
+     * @param nombreArchivo nombre del archivo donde se va aguardar el catalogo
+     * @throws IOException devuelve IOException cuando no se puede escribir
+     */
     public void guardarRutinasEnArchivo(String nombreArchivo) throws IOException {
         try (FileWriter fileWriter = new FileWriter(nombreArchivo, StandardCharsets.UTF_8)) {
             for (int i = 0; i < numRutinas; i++) {
                 fileWriter.write(rutinas[i].toRawString());
             }
         }
-        // Guarda las rutinas en un archivo de texto
     }
 
     public void cargarRutinasDeArchivo(String nombreArchivo, int maxEjercicios, int maxEstiramientos) throws IOException {
@@ -67,19 +87,26 @@ public class CatalogoDeRutinas {
         }
     }
 
+    /**
+     * Comprueba si el catálogo de rutinas está completo
+     * @return true si el catalogo tiene todas sus posiciones ocupadas
+     */
     public boolean catalogoCompleto() {
-        // Comprueba si el catálogo de rutinas está completo
         return numRutinas == rutinas.length;
-        // @todo MODIFICAR PARA DEVOLVER SI ESTÁ COMPLETO
     }
 
+    /**
+     * @return Devuelve el número de rutinas en el catálogo
+     */
     public int numRutinas() {
-        // Devuelve el número de rutinas en el catálogo
-        return numRutinas; // @todo MODIFICAR PARA DEVOLVER EL NÚMERO DE RUTINAS
+        return numRutinas;
     }
 
+    /**
+     * Elimina una rutina del catálogo
+     * @param seleccionada rutina que se desea eliminar
+     */
     public void eliminarRutina(Rutina seleccionada) {
-        // Elimina una rutina del catálogo
         int pos = -1;
         for (int i = 0; i < numRutinas; i++) {
             if (rutinas[i] == seleccionada) {
