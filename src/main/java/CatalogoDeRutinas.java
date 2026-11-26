@@ -1,14 +1,25 @@
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * objeto catalogo de rutinas
+ */
 public class CatalogoDeRutinas {
+    /**
+     * numero de rutinas en el catalogo
+     */
     private int numRutinas;
+    /**
+     * array de las rutinas
+     */
     private Rutina[] rutinas;
 
+    /**
+     * Inicialización del catálogo de rutinas
+     * @param maxRutinasEnCatalogo tamaño maximo del catalogo
+     */
     public CatalogoDeRutinas(int maxRutinasEnCatalogo) {
-        // Inicialización del catálogo de rutinas
         rutinas = new Rutina[maxRutinasEnCatalogo];
         numRutinas = 0;
     }
