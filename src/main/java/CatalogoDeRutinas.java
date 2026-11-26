@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -70,9 +72,29 @@ public class CatalogoDeRutinas {
 
     public void cargarRutinasDeArchivo(String nombreArchivo, int maxEjercicios, int maxEstiramientos) throws IOException {
         // Carga las rutinas desde un archivo de texto y las añade al catálogo
-        try(FileWriter fw = new FileWriter(nombreArchivo, StandardCharsets.UTF_8)) {
-            for(int i = 0; i < numRutinas; i++) {
-                fw.write(rutinas[i].toRawString());
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(nombreArchivo, StandardCharsets.UTF_8))) {
+            String linea = bufferedReader.readLine();
+            while (!catalogoCompleto() && linea != null){
+                while (linea.isBlank()) {
+                    linea = bufferedReader.readLine();
+                }
+                Rutina rutinaActual = new Rutina(linea, maxEjercicios, maxEstiramientos);
+                linea = bufferedReader.readLine();
+                while (linea != null && !linea.contentEquals("ESTIRAMIENTOS" )){
+                    if (!linea.isBlank()){
+                        rutinaActual.agregarEjercicio(linea);
+                    }
+                    linea = bufferedReader.readLine();
+                }
+                linea = bufferedReader.readLine();
+                while (linea != null && !linea.contentEquals("=====")){
+                    if (!linea.isBlank()){
+                        rutinaActual.agregarEstiramiento(linea);
+                    }
+                    linea = bufferedReader.readLine();
+                }
+                linea = bufferedReader.readLine();
+                this.agregarRutina(rutinaActual);
             }
         }
     }
